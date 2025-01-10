@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦境解读师 & 梦境续写</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+</head>
+<body>
+    <!-- 欢迎弹窗 -->
+    <div class="welcome-modal">
+        <div class="welcome-content">
+            <button class="welcome-close">&times;</button>
+            <div class="welcome-header">
+                <h2>欢迎使用梦境解读师</h2>
+                <p>探索你的梦境世界，发现内心的奥秘</p>
+            </div>
+
+            <div class="welcome-section">
+                <h3>功能介绍</h3>
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">🔮</div>
+                        <div class="feature-text">
+                            <div class="feature-title">梦境解读</div>
+                            <div class="feature-description">
+                                基于专业的心理学理论，包括荣格分析、弗洛伊德理论等，对您的梦境进行多维度解析，
+                                帮助您理解梦境背后的深层含义。
+                            </div>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">✍️</div>
+                        <div class="feature-text">
+                            <div class="feature-title">梦境续写</div>
+                            <div class="feature-description">
+                                基于您提供的梦境片段，运用创意写作技巧和心理意象，
+                                为您创造一个完整而富有意义的梦境故事。
+                            </div>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-text">
+                            <div class="feature-title">可视化分析</div>
+                            <div class="feature-description">
+                                通过情感波动图、意象关系图等多种可视化方式，
+                                直观展现梦境的情感脉络和象征意义。
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="welcome-section">
+                <h3>使用指南</h3>
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">1️⃣</div>
+                        <div class="feature-text">
+                            <div class="feature-title">梦境解读功能</div>
+                            <div class="feature-description">
+                                在输入框中详细描述您的梦境内容，点击"解读梦境"按钮，
+                                系统将从多个维度对您的梦境进行专业解析。
+                            </div>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">2️⃣</div>
+                        <div class="feature-text">
+                            <div class="feature-title">梦境续写功能</div>
+                            <div class="feature-description">
+                                输入您想要续写的梦境片段，点击"续写梦境"按钮，
+                                系统将为您创造一个富有想象力和深度的梦境故事。
+                            </div>
+                        </div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">3️⃣</div>
+                        <div class="feature-text">
+                            <div class="feature-title">查看分析结果</div>
+                            <div class="feature-description">
+                                系统将通过文字解析和可视化图表展示分析结果，
+                                您可以点击不同的可视化选项查看不同维度的分析。
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="welcome-footer">
+                <button class="start-btn">开始探索梦境</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>梦境解读师</h1>
+            <p class="subtitle">探索你的梦境世界，发现内心的奥秘</p>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="interpret">梦境解读</button>
+                <button class="tab-btn" data-tab="continue">梦境续写</button>
+            </div>
+
+            <div class="content-area">
+                <div id="interpret-section" class="tab-content active">
+                    <div class="input-section">
+                        <textarea id="dream-input" placeholder="请描述你的梦境..."></textarea>
+                        <button id="interpret-btn" class="action-btn">解读梦境</button>
+                    </div>
+                    
+                    <!-- 解读过程可视化 -->
+                    <div class="analysis-process" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        
+                        <div class="process-steps">
+                            <!-- 步骤将通过JS动态添加 -->
+                        </div>
+
+                        <div class="visualization-section">
+                            <div class="visualization-controls">
+                                <button class="control-btn" data-view="emotion">情感波动</button>
+                                <button class="control-btn" data-view="imagery">意象关系</button>
+                                <button class="control-btn" data-view="theme">主题分析</button>
+                            </div>
+
+                            <div class="visualization-content">
+                                <div class="emotion-wave">
+                                    <canvas class="wave-canvas"></canvas>
+                                </div>
+                                <div class="imagery-map"></div>
+                                <div class="theme-elements"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-section">
+                        <div id="interpretation-result" class="result-content"></div>
+                    </div>
+                </div>
+
+                <div id="continue-section" class="tab-content">
+                    <div class="input-section">
+                        <textarea id="dream-fragment" placeholder="请输入梦境片段，让AI为你续写..."></textarea>
+                        <button id="continue-btn" class="action-btn">续写梦境</button>
+                    </div>
+
+                    <!-- 续写过程可视化 -->
+                    <div class="writing-process" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+
+                        <div class="visualization-section">
+                            <div class="story-flow">
+                                <!-- 故事流将通过JS动态添加 -->
+                            </div>
+                            <div class="emotion-track">
+                                <canvas class="emotion-canvas"></canvas>
+                            </div>
+                            <div class="symbol-cloud">
+                                <!-- 符号云将通过JS动态添加 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-section">
+                        <div id="continuation-result" class="result-content"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by 智能周公</p>
+        </footer>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
